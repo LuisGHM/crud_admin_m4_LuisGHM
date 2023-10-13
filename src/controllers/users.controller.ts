@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { Users, UsersRead, UsersReturn } from "../interfaces/users.interface";
-import { getAllUsersService, postUsersService } from "../services/users.service";
+import { getAllUsersService, getUsersrCoursesService, postUsersService } from "../services/users.service";
 
 export const postUsersController = async (req: Request, res: Response): Promise<Response> => {
     const users: UsersReturn = await postUsersService(req.body);
@@ -13,7 +13,9 @@ export const getAllUsersController = async (req: Request, res: Response): Promis
     
     return res.status(200).json(users);
 } 
-/* 
+
 export const getUsersrCoursesController = async (req: Request, res: Response): Promise<Response> => {
-    const usersCourse = await getUsersrCoursesService();
-} */
+    const usersCourse = await getUsersrCoursesService(+req.params.id);
+
+    return res.status(200).json(usersCourse);
+} 
