@@ -2,7 +2,7 @@ import format from "pg-format";
 import { Users, UsersCreate, UsersRead, UsersResult, UsersReturn } from "../interfaces/users.interface"
 import { client } from "../database";
 import { hashSync } from "bcryptjs";
-import { usersReturnSchema } from "../schemas/users.schema";
+import { usersReadSchema, usersReturnSchema } from "../schemas/users.schema";
 
 export const postUsersService = async (data: UsersCreate): Promise<UsersReturn> => {
     data.password = hashSync(data.password, 12);
@@ -14,10 +14,10 @@ export const postUsersService = async (data: UsersCreate): Promise<UsersReturn> 
     return usersReturnSchema.parse(queryResult.rows[0]);
 }
 
-/* export const getAllUsersService = async (): Promise<UsersRead> =>{
-    const query: string = "SELECT * FROM users;"
+export const getAllUsersService = async (): Promise<UsersRead> =>{
+    const query: string = "SELECT * FROM users;";
 
     const queryResult: UsersResult = await client.query(query);
-
-    return queryResult.rows;
-} */
+    
+    return usersReadSchema.parse(queryResult.rows);
+} 
