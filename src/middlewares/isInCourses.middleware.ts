@@ -5,8 +5,8 @@ import { client } from "../database";
 export const isInCoursesMiddleware = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const { id } = req.params;
 
-    const queryUser: string = `SELECT * FROM "userCourses" WHERE id = $1;`;
-    const queryUserResult = await client.query(queryUser, [id]);
+    const queryUser: string = `SELECT * FROM "userCourses" WHERE "userId" = $1;`;
+    const queryUserResult = await client.query(queryUser, [id]); 
 
     if (queryUserResult.rowCount == 0) {
         throw new AppError("No course found", 404);

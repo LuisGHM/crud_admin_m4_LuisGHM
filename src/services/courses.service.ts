@@ -26,3 +26,31 @@ export const postUserCoursesService = async (courseId: string, userId: string): 
 
     return;
 }
+
+export const getCoursesUsersrService = async (id: number) => {
+    const query: string = `
+    SELECT
+    u.id AS "userId",
+    u.name AS "userName",
+    c.id AS "courseId",
+    c.name AS "courseName",
+    c.description AS "courseDescription",
+    uc.active as "userActiveInCourse"
+    FROM users AS u
+    JOIN "userCourses" AS uc ON u.id = uc."userId"
+    JOIN courses AS c ON uc."courseId" = c.id
+    WHERE c.id = $1;
+    `
+
+    const queryResult = await client.query(query, [id])
+
+    return queryResult.rows
+} 
+
+export const deleteUserCorserService = async (courseId: number, userId: number): Promise<void> => {
+    const query: string = `UPDATE "userCourses" SET active = false WHERE "userId" = $1 AND "courseId" = $2;`;
+
+    await client.query(query, [userId, courseId]);
+
+    return;
+}

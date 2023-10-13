@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getAllCoursesController, postCoursesController, postUserCoursesController } from "../controllers/courses.controller";
+import { deleteUserCorserController, getAllCoursesController, getCoursesUsersrController, postCoursesController, postUserCoursesController } from "../controllers/courses.controller";
 import { validateBody } from "../middlewares/validateBody.middleware";
 import { coursesCreateSchema } from "../schemas/courses.schema";
 import { validateAcessMiddleware } from "../middlewares/validateAcess.middleware";
@@ -11,3 +11,5 @@ export const coursesRoute: Router = Router();
 coursesRoute.post("/", validateTokenMiddleware, validateAcessMiddleware, validateBody(coursesCreateSchema), postCoursesController);
 coursesRoute.get("/", getAllCoursesController);
 coursesRoute.post("/:courseId/users/:userId", validateTokenMiddleware, validateAcessMiddleware, existUserCourseMiddleware, postUserCoursesController);
+coursesRoute.get("/:id/users", validateTokenMiddleware, validateAcessMiddleware, getCoursesUsersrController);
+coursesRoute.delete("/:courseId/users/:userId",validateTokenMiddleware, validateAcessMiddleware, existUserCourseMiddleware, deleteUserCorserController);

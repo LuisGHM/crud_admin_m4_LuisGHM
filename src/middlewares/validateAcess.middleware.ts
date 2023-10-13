@@ -8,5 +8,5 @@ export const validateAcessMiddleware = (req: Request, res: Response, next: NextF
         return next();
     }
 
-    throw new AppError("Insufficient permission", 401);
+    throw new AppError("Insufficient permission", 403);
 }
