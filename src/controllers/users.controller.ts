@@ -13,3 +13,7 @@ export const getAllUsersController = async (req: Request, res: Response): Promis
     
     return res.status(200).json(users);
 } 
+/* 
+export const getUsersrCoursesController = async (req: Request, res: Response): Promise<Response> => {
+    const usersCourse = await getUsersrCoursesService();
+} */

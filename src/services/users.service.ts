@@ -21,3 +21,18 @@ export const getAllUsersService = async (): Promise<UsersRead> =>{
     
     return usersReadSchema.parse(queryResult.rows);
 } 
+
+/* export const getUsersrCoursesService = async () => {
+    const query: string = `SELECT
+    c.id AS "courseId",
+    c.name AS "courseName",
+    c.description AS "courseDescription",
+    uc.active AS "userActiveInCourse",
+    u.id AS "userId",
+    u.name AS "userName"
+    FROM users AS u
+    JOIN "userCourses" AS uc ON u.id = uc."userId"
+    JOIN courses AS c ON uc."courseId" = c.id
+    WHERE u.id = <ID_DO_USUÁRIO>;
+    `
+} */

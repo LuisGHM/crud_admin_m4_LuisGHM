@@ -10,3 +10,4 @@ export const usersRoute: Router = Router();
 
 usersRoute.post("/", validateBody(usersCreateSchema), uniqueEmailMiddleware, postUsersController);
 usersRoute.get("/", validateTokenMiddleware, validateAcessMiddleware, getAllUsersController);
+usersRoute.get("/:id/courses")
