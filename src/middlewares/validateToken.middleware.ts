@@ -5,7 +5,7 @@ import { verify } from "jsonwebtoken";
 export const validateTokenMiddleware = (req: Request, res: Response, next: NextFunction): void => {
     const authorization: string | undefined = req.headers.authorization
     
-    if(!authorization || authorization == "Bearer"){
+    if(!authorization || authorization == "Bearer" || authorization == `Bearer ${undefined}`){
         throw new AppError("Missing bearer token", 401);
     }
 

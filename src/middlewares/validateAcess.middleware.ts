@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import AppError from "../errors/App.error";
 
 export const validateAcessMiddleware = (req: Request, res: Response, next: NextFunction): void =>{
-    const {sub, admin} = res.locals.decoded;
+    const {admin} = res.locals.decoded;
 
     if(admin){
         return next();
